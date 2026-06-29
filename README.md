@@ -85,7 +85,7 @@ xai_runner/
 
 ## Dataset Requirements
 
-The input dataset must contain:
+The input dataset must contain the following business dimensions and target variable:
 
 ### Mandatory Columns
 
@@ -98,14 +98,18 @@ The input dataset must contain:
 
 ### Optional Driver Variables
 
+The framework can analyze any additional business drivers such as:
+
 * Price
 * Promotions
-* Economic indicators
+* Discounts
 * Weather indicators
-* Holiday information
+* Economic indicators
+* Holidays
 * Events
 * Seasonal factors
-* Calendar variables
+* Marketing spend
+* Distribution metrics
 
 ---
 
@@ -113,15 +117,11 @@ The input dataset must contain:
 
 ### Step 1: Load Dataset
 
-The system loads:
-
-```python
-dataset.csv
-```
+The system loads the input dataset and validates mandatory columns.
 
 ### Step 2: Segment Data
 
-Data is split by:
+Data is segmented hierarchically:
 
 ```text
 Region
@@ -129,34 +129,40 @@ Region
             └── Product
 ```
 
+Each product group is analyzed independently.
+
 ### Step 3: Feature Engineering
+
+The preprocessing layer performs:
 
 * Data type detection
 * Numeric conversion
-* Encoding
-* Scaling (Min-Max)
+* Missing value handling
+* Feature scaling using Min-Max normalization
+* Data quality validation
 
 ### Step 4: Driver Analysis
 
-For each product:
+For each product segment, the system performs:
 
 * Regression model training
 * Driver coefficient estimation
-* Statistical significance analysis
+* Feature impact measurement
+* Business driver ranking
 
-### Step 5: SHAP Analysis
+### Step 5: SHAP Explainability Analysis
 
-The engine calculates:
+The explainability layer calculates:
 
 * SHAP values
-* Driver importance
-* Positive contribution %
-* Negative contribution %
-* Mean impact
+* Feature importance
+* Positive contribution percentage
+* Negative contribution percentage
+* Average feature impact
 
-### Step 6: Generate Outputs
+### Step 6: Output Generation
 
-Consolidated reports are created in the outputs folder.
+All analysis outputs and visualizations are generated and stored in the output directory.
 
 ---
 
@@ -183,7 +189,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-#### Linux / Mac
+#### Linux / macOS
 
 ```bash
 source venv/bin/activate
@@ -199,7 +205,7 @@ pip install -r requirements.txt
 
 ## Running the Application
 
-Execute:
+Execute the application using:
 
 ```bash
 python main.py
@@ -207,11 +213,12 @@ python main.py
 
 The system will:
 
-1. Load dataset
-2. Create metadata
-3. Run analysis by Region → Category → Product
-4. Generate explainability reports
-5. Save outputs
+1. Load and validate the dataset
+2. Generate dataset metadata
+3. Process data by Region → Category → Product
+4. Perform driver analysis
+5. Generate SHAP explainability outputs
+6. Save reports and visualizations
 
 ---
 
@@ -222,8 +229,9 @@ The system will:
 Contains:
 
 * Driver coefficients
-* Impact estimates
-* Business driver rankings
+* Driver impact estimates
+* Feature ranking
+* Business interpretation metrics
 
 ---
 
@@ -231,10 +239,10 @@ Contains:
 
 Contains:
 
-* Driver importance scores
-* Positive contribution %
-* Negative contribution %
-* Average SHAP values
+* Overall feature importance
+* Positive contribution percentage
+* Negative contribution percentage
+* Mean SHAP values
 
 ---
 
@@ -242,55 +250,73 @@ Contains:
 
 Contains:
 
-* Individual record-level SHAP values
-* Driver contribution details
+* Record-level SHAP values
+* Feature contribution details
+* Explainability outputs for each observation
+
+---
+
+### cleaned_raw_data.csv
+
+Contains:
+
+* Processed dataset after cleaning
+* Standardized feature values
+* Analysis-ready data
+
+---
+
+### column_summary.csv
+
+Contains:
+
+* Column names
+* Data types
+* Missing value statistics
+* Summary information
 
 ---
 
 ### data_description.csv
 
-Stores metadata including:
+Contains:
 
-* Dataset name
-* Model type
-* Target variable
-* Record count
-* Column count
-* Business description
+* Dataset metadata
+* Analysis configuration
+* Target variable information
+* Record and column counts
 
 ---
 
 ### shap_summary_minmax.png
 
-Visual SHAP summary chart showing feature importance ranking.
+Visual representation of:
+
+* Feature importance ranking
+* SHAP impact distribution
+* Driver comparison summary
 
 ---
 
 ## Business Interpretation
 
-The generated outputs support:
+The framework helps answer key business questions such as:
 
-### Estimation of Impact
+### Which factors influence sales the most?
 
-Determine:
+Identify the most important drivers affecting demand performance.
 
-> How much the target KPI changes when a driver changes by 1%.
+### What is the impact of each driver?
 
-### Driver Prioritization
+Quantify how changes in a driver affect the target KPI.
 
-Identify:
+### Which drivers are positive or negative contributors?
 
-* Most influential drivers
-* Least influential drivers
-* Positive vs negative contributors
+Understand whether a factor increases or decreases sales demand.
 
-### Strategic Decision Making
+### Which business levers should be prioritized?
 
-Understand the contribution of:
-
-* Controllable factors
-* Uncontrollable factors
-* External market conditions
+Rank controllable factors to support strategic decision-making.
 
 ---
 
@@ -314,40 +340,34 @@ Identify:
 
 * Price sensitivity
 * Promotion effectiveness
-* Seasonal demand drivers
+* Seasonal demand patterns
 
-### Consumer Goods
+### Consumer Goods Analytics
 
-Measure impact of:
+Measure the impact of:
 
-* Weather
+* Weather conditions
 * Economic indicators
-* Events
-* Holidays
+* Holidays and events
+* Distribution performance
 
-### Sales Planning
+### Sales & Revenue Planning
 
 Support:
 
-* Revenue forecasting
+* Demand forecasting
 * Inventory planning
-* Marketing optimization
+* Sales strategy optimization
+* Marketing effectiveness analysis
 
----
+### Business Driver Analysis
 
-## Future Enhancements
+Enable stakeholders to:
 
-* Forecasting models (XGBoost, Random Forest)
-* Interactive dashboards
-* Automated report generation
-* Scenario simulation
-* Driver sensitivity analysis
-* API deployment
+* Understand key demand drivers
+* Explain forecast movements
+* Improve planning accuracy
+* Support data-driven decision-making
 
----
-
-## Author
-
-XAI Demand Forecasting & Driver Analysis Framework
-
-Version: 1.0
+```
+```
