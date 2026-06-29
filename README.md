@@ -263,3 +263,91 @@ Stores metadata including:
 ### shap_summary_minmax.png
 
 Visual SHAP summary chart showing feature importance ranking.
+
+---
+
+## Business Interpretation
+
+The generated outputs support:
+
+### Estimation of Impact
+
+Determine:
+
+> How much the target KPI changes when a driver changes by 1%.
+
+### Driver Prioritization
+
+Identify:
+
+* Most influential drivers
+* Least influential drivers
+* Positive vs negative contributors
+
+### Strategic Decision Making
+
+Understand the contribution of:
+
+* Controllable factors
+* Uncontrollable factors
+* External market conditions
+
+---
+
+## Technology Stack
+
+* Python
+* Pandas
+* NumPy
+* Scikit-Learn
+* SHAP
+* StatsModels
+* Matplotlib
+
+---
+
+## Example Use Cases
+
+### Retail Demand Forecasting
+
+Identify:
+
+* Price sensitivity
+* Promotion effectiveness
+* Seasonal demand drivers
+
+### Consumer Goods
+
+Measure impact of:
+
+* Weather
+* Economic indicators
+* Events
+* Holidays
+
+### Sales Planning
+
+Support:
+
+* Revenue forecasting
+* Inventory planning
+* Marketing optimization
+
+---
+
+## Future Enhancements
+
+* Forecasting models (XGBoost, Random Forest)
+* Interactive dashboards
+* Automated report generation
+* Scenario simulation
+* Driver sensitivity analysis
+* API deployment
+
+---
+
+## Author
+
+XAI Demand Forecasting & Driver Analysis Framework
+
+Version: 1.0
